@@ -1,0 +1,7 @@
+.git
+publication
+evidence
+docs
+**/__pycache__
+**/*.pyc
+
