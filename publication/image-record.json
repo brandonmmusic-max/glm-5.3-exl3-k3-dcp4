@@ -1,0 +1,239 @@
+{
+  "schema_version": 4,
+  "record_id": "glm53-exl3-k3-jovian-r10-tp4-dcp4-mtp3-research-v1",
+  "title": "Full GLM-5.3 EXL3 K3 TP4 DCP4 MTP3 research image",
+  "summary": "Custom research-only Jovian r10 image with the 17-file full GLM-5.3 K3 DCP4/MTP3 composition baked over a digest-pinned compiled EXL3 base; model weights are excluded.",
+  "model_family": "GLM-5.3 full, GlmMoeDsaForCausalLM",
+  "release_class": "community-derivative",
+  "distribution_role": "custom",
+  "qualification_status": "research-only",
+  "maintenance_status": "ephemeral",
+  "image": {
+    "repository": "verdictai/glm53-exl3-k3",
+    "tag": "jovian-r10-tp4-dcp4-mtp3-research-v1",
+    "digest": "sha256:d2c9345ba443b49c41fcd8a30b8ca6b30af7e313cf48b65eb6a7cd1478440399",
+    "reference": "verdictai/glm53-exl3-k3:jovian-r10-tp4-dcp4-mtp3-research-v1@sha256:d2c9345ba443b49c41fcd8a30b8ca6b30af7e313cf48b65eb6a7cd1478440399"
+  },
+  "base_image": {
+    "repository": "verdictai/glm53-exl3-k3",
+    "tag": "jovian-r10-k3-fused-runtime-base-v1",
+    "digest": "sha256:2f618ef8c734ce02c8589c55bfdf4f9a79d63d7997378f34737d27574bda538a",
+    "reference": "verdictai/glm53-exl3-k3:jovian-r10-k3-fused-runtime-base-v1@sha256:2f618ef8c734ce02c8589c55bfdf4f9a79d63d7997378f34737d27574bda538a",
+    "credit": "Jovian r10 Local Inference Lab composition with the compiled EXL3 uniform-K3 extension; derived from the pinned NVIDIA PyTorch and voipmonitor runtime lineage documented in PROVENANCE.md."
+  },
+  "recommended_image": {
+    "reference": "verdictai/glm53-exl3-k3:jovian-r10-k3-fused-runtime-base-v1@sha256:2f618ef8c734ce02c8589c55bfdf4f9a79d63d7997378f34737d27574bda538a",
+    "relationship": "Pinned runtime-base control only. No recommended full GLM-5.3 EXL3 K3 image is established by this custom publication."
+  },
+  "community_wiki": {
+    "repository": "https://github.com/local-inference-lab/rtx6kpro",
+    "commit": "f8af0aec0db75183e7164ac6178243e219560390",
+    "runbook_path": "models/glm-5.3-flash.md",
+    "runbook_url": "https://github.com/local-inference-lab/rtx6kpro/blob/f8af0aec0db75183e7164ac6178243e219560390/models/glm-5.3-flash.md",
+    "relationship": "Closest architecture-related community runbook only; that runbook covers GLM-5.3-Flash, while this image targets the distinct full GLM-5.3 architecture."
+  },
+  "build": {
+    "recipe_url": "https://github.com/brandonmmusic-max/glm-5.3-exl3-k3-dcp4/blob/65a04c8e2716af994894ab0ded294c574950fc16/Dockerfile",
+    "recipe_commit": "65a04c8e2716af994894ab0ded294c574950fc16",
+    "build_command": "docker build --build-arg RECIPE_COMMIT=65a04c8e2716af994894ab0ded294c574950fc16 -t verdictai/glm53-exl3-k3:jovian-r10-tp4-dcp4-mtp3-research-v1 .",
+    "components": [
+      {
+        "name": "vLLM Jovian candidate plus full GLM-5.3 DCP4 composition",
+        "repository": "https://github.com/local-inference-lab/vllm",
+        "commit": "3d33a5a0f596567d4acfe77dc6a9e0f2d07ada77",
+        "release_reference": "N/A",
+        "pull_requests": [
+          {
+            "url": "https://github.com/local-inference-lab/vllm/pull/562",
+            "head_commit": "97ba04f40bb48273762491749b3f0834ec32ad93",
+            "title": "Add EXL3 Trellis support on Jovian",
+            "authors": ["Derek Yates", "Brandon Music", "David Young", "Martin Vit", "Michel Belleau"]
+          },
+          {
+            "url": "https://github.com/local-inference-lab/vllm/pull/560",
+            "head_commit": "8d7f8207bfd95ec9fc225acef9ca7fd97b39dd22",
+            "title": "Handle empty DCP ranks and gather sparse MLA queries",
+            "authors": ["Derek Yates"]
+          },
+          {
+            "url": "https://github.com/local-inference-lab/vllm/pull/565",
+            "head_commit": "d461572be161b8dc1ac37964ccd6c1d5694cc105",
+            "title": "Fuse K3 DCP verification queries",
+            "authors": ["myshytf"]
+          }
+        ],
+        "patches": [
+          {
+            "path_or_url": "https://github.com/brandonmmusic-max/glm-5.3-exl3-k3-dcp4/blob/65a04c8e2716af994894ab0ded294c574950fc16/evidence/overlay-manifest.tsv",
+            "sha256": "sha256:deec02c8bd1f8f0a50f989ad1df83e0b7adb03f79972dd2379c9eabfa62609e4",
+            "purpose": "Identity manifest for the exact baked overlay composition, including old and new file hashes.",
+            "authors": ["Brandon Music", "Local Inference Lab contributors"]
+          }
+        ],
+        "overlays": []
+      },
+      {
+        "name": "B12X candidate",
+        "repository": "https://github.com/local-inference-lab/b12x",
+        "commit": "ccb89b6e444bd9eaa9115b97eb6def2a42dede9c",
+        "release_reference": "N/A",
+        "pull_requests": [],
+        "patches": [],
+        "overlays": []
+      },
+      {
+        "name": "ExLlamaV3",
+        "repository": "https://github.com/brandonmmusic-max/exllamav3",
+        "commit": "704aefd743b390af4bd0fb429d1906f9b964c7d8",
+        "release_reference": "N/A",
+        "pull_requests": [],
+        "patches": [],
+        "overlays": []
+      }
+    ],
+    "package_changes": [
+      "Bakes the previously bind-mounted 14 vLLM and 3 B12X source files into the image.",
+      "Adds a fail-closed launcher for the full GLM-5.3 K3 target plus K5 MTP78 receipt contract.",
+      "Does not add model weights or a calibration/scales artifact."
+    ],
+    "build_arguments": [
+      "BASE_IMAGE defaults to the immutable K3 compiled-runtime base digest.",
+      "RECIPE_COMMIT=65a04c8e2716af994894ab0ded294c574950fc16"
+    ],
+    "environment_defaults": [
+      "Dynamic NVFP4 DS MLA scale path; no static scales file is bundled.",
+      "EXL3 Trellis prefill block M 64 and small-M split-K enabled.",
+      "B12X direct DCP A2A and PCIe all-reduce enabled with query replication disabled.",
+      "Full decode AOT/CUDA-graph settings enabled; breakable CUDA graphs disabled."
+    ],
+    "entrypoint_changes": [
+      "Installs /usr/local/bin/serve-glm53-exl3-k3-dcp4 as the image entrypoint.",
+      "Fixes TP4, DCP4 A2A, MTP3 greedy checkpoint reuse, 0.97 memory utilization, and NVFP4 DS MLA.",
+      "Retains both interleave arguments for exact replay; the deprecated DCP value 64 is the effective value."
+    ],
+    "result_tree": "dc3b9e5ed802c023192def880015630a22ee09e9",
+    "integration_patch_sha256": "N/A"
+  },
+  "changes": {
+    "inherited": [
+      "CUDA 13.3, PyTorch 2.13, NCCL 2.31.2, vLLM/B12X runtime, and compiled EXL3 K3 extension from the pinned base.",
+      "The base includes broader Jovian support and stale inherited GLM-5.3-Flash labels."
+    ],
+    "introduced": [
+      "Full GLM-5.3 model adapter, logical-to-physical DCP4 sparse MLA mapping, DCP A2A/LSE path, MTP3 plumbing, and fused K3/K5 route-pack source overlays.",
+      "Accurate OCI identity labels for full GLM-5.3, uniform-K3 target, K5 MTP78, TP4/DCP4/MTP3, and a 368-byte NVFP4 DS MLA record.",
+      "Portable launcher with four runtime-ignored DCP environment variables removed."
+    ],
+    "compatibility_impact": [
+      "Requires four compatible NVIDIA GPUs, a receipt-bearing TP4 materialized checkpoint mounted read-only at /model, and a writable /cache mount.",
+      "The image is intentionally specialized to full GLM-5.3 K3/K5 and is not a GLM-5.3-Flash image.",
+      "DCP1 is not advertised; retained evidence did not establish that path."
+    ]
+  },
+  "tested_configurations": [
+    {
+      "name": "Published baked image exact-profile GPU runtime",
+      "hardware": "Not tested",
+      "topology": "Not tested",
+      "power_and_clocks": "Not tested",
+      "driver": "Not tested",
+      "cuda_runtime": "Not tested",
+      "pytorch": "Not tested",
+      "nccl": "Not tested",
+      "engine_source": "Not tested",
+      "model_revision": "Not tested",
+      "quantization": "Not tested",
+      "parallelism": "Not tested",
+      "kv_cache": "Not tested",
+      "speculative_mode": "Not tested",
+      "graph_mode": "Not tested",
+      "scheduler_limits": "Not tested",
+      "cache_policy": "Not tested",
+      "launch_command": "Not tested"
+    }
+  ],
+  "validation": {
+    "commands": ["Not tested"],
+    "results": [
+      {
+        "name": "Fresh runtime startup, correctness, stability, and performance validation",
+        "status": "not-tested",
+        "conditions": "No model launch or GPU test was authorized for this publication.",
+        "measurement": "Not tested",
+        "result": "Not tested",
+        "conclusion": "The image is research-only and must not be treated as qualified.",
+        "evidence_url": "N/A",
+        "evidence_sha256": "N/A",
+        "category": "other"
+      }
+    ],
+    "performance_claims": [
+      {
+        "name": "N/A",
+        "candidate_image": "N/A",
+        "baseline_image": "N/A",
+        "benchmark_repository": "N/A",
+        "benchmark_commit": "N/A",
+        "candidate_command": "N/A",
+        "baseline_command": "N/A",
+        "hardware": "N/A",
+        "model_revision": "N/A",
+        "concurrency": "N/A",
+        "input_lengths": "N/A",
+        "output_length_or_duration": "N/A",
+        "evidence_class": "N/A",
+        "experimental_unit": "N/A",
+        "runs": "N/A",
+        "run_order": "N/A",
+        "stopping_rule": "N/A",
+        "exclusions": "N/A",
+        "aggregation": "N/A",
+        "changed_variables": ["N/A"],
+        "nuisance_variables": ["N/A"],
+        "rival_explanations": ["N/A"],
+        "falsification_condition": "N/A",
+        "repeated_control_variation": "Not tested",
+        "absolute_effect": "N/A",
+        "relative_effect": "N/A",
+        "uncertainty": "N/A",
+        "raw_results_url": "N/A",
+        "raw_results_sha256": "N/A",
+        "result": "N/A",
+        "conclusion": "N/A"
+      }
+    ]
+  },
+  "limitations": {
+    "known": [
+      "The baked image has not received a fresh GPU startup after replacing host bind mounts with image layers.",
+      "Historical runtime evidence used a different launcher hash and cannot qualify this publication.",
+      "Dynamic NVFP4 scales are enabled; no separately calibrated static MLA scale artifact is included.",
+      "The effective DCP cache interleave is 64 because the retained deprecated argument overrides cp interleave 1."
+    ],
+    "untested": [
+      "Fresh server readiness and /v1/models identity check",
+      "LLM decode benchmark, acceptance, prefill, stability, and long-context behavior",
+      "DCP1 and any topology other than TP4/DCP4/MTP3"
+    ],
+    "unsupported": [
+      "GLM-5.3-Flash checkpoints, checkpoints without the exact materialization receipt, CPU serving, and automatic model downloads."
+    ]
+  },
+  "support": {
+    "owner": "Brandon Music",
+    "contact": "Use the public GitHub support issue.",
+    "issue_tracker": "https://github.com/brandonmmusic-max/glm-5.3-exl3-k3-dcp4/issues",
+    "support_thread": "https://github.com/brandonmmusic-max/glm-5.3-exl3-k3-dcp4/issues/1",
+    "thread_status": "active",
+    "support_commitment": "ephemeral",
+    "triage_policy": "Keep reports in issue 1 with immutable image digest, hardware and topology, checkpoint receipt identity, complete launch command, and logs. Escalate upstream only after a minimal reproducer identifies the responsible source change.",
+    "superseded_by": "N/A"
+  },
+  "publication": {
+    "record_url": "https://raw.githubusercontent.com/brandonmmusic-max/glm-5.3-exl3-k3-dcp4/main/publication/image-record.json",
+    "main_channel_link": "N/A",
+    "main_channel_link_count": 0,
+    "bot_listing": "not-applicable",
+    "maintainer_approval_url": "N/A"
+  }
+}
